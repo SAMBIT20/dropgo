@@ -4,19 +4,23 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const path = require('path');
 const cors = require('cors');
-Cors 
+// Cors 
 const corsOptions = {
   origin: process.env.ALLOWED_CLIENTS.split(',')
+  // ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:3300']
 }
+
+// Default configuration looks like
+// {
+//     "origin": "*",
+//     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     "preflightContinue": false,
+//     "optionsSuccessStatus": 204
+//   }
 
 app.use(cors(corsOptions))
 app.use(express.static('public'));
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', "*");
-    res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-})
+
 const connectDB = require('./config/db');
 connectDB();
 
